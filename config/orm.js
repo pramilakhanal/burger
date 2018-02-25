@@ -15,14 +15,14 @@ var orm = {
 
 	insertOne: function(table, insertObj, callback) {
     var queryString = "INSERT INTO " + table + " SET ?";
-    connection.query(queryString, [insertObj], function(err, result) {
+    connection.query(queryString, [insertObj, {devoured: false}], function(err, result) {
       if (err) {
         throw err;
       }
       callback(result);
     });
   },
-
+//UPDATE burgers SET devoured = false WHERE id = 10;
   	updateOne: function(table, objColVals, condition, callback) {
     var queryString = "UPDATE " + table + " SET ? WHERE ?";
     connection.query(queryString, [objColVals, condition], function(err, result) {

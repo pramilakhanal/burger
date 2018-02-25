@@ -9,35 +9,35 @@ router.get("/", function(req, res) {
 		var burgersInfo = {
 			burgers: data
 		};
-		console.log(burgersInfo);
+		// console.log(burgersInfo);
 
 		res.render("index", burgersInfo);
 	});
 });
 
 	router.post("/", function(req, res) {
-		console.log(req.body);
+		//console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%',req.body);
 
-		burger.create(req.body), function(req, res) {
+		burger.create(req.body, function(){
 			res.redirect("/");
-		};
+		});
 
 	});
 
 
 	router.put("/:id/:update", function(req, res) {
-		var condition = {id: req.params.id};
-		console.log("condition", condition);
+		var item = {id: req.params.id, condition: req.params.update};
+		// console.log("condition", condition);
 
-		if (req.params.update === "0") {
-			burger.update({devoured: true}, condition, function() {
+		if (item.condition === "0") {
+			burger.update({devoured: true}, {id: item.id}, function() {
 
 				res.redirect("/");
 
 			});
 		}
 		else {
-			burger.update({devoured: false}, conditon, function() {
+			burger.update({devoured: false}, item.id, function() {
 				res.redirect("/");
 			});
 		}

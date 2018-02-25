@@ -9,7 +9,7 @@ var orm = require("../config/orm.js");
 
   create: function(req, callback)
   {
-  	orm.insertOne("burgers", function(req, res) {
+  	orm.insertOne("burgers", req, function(res) {
   		callback(res);
   	});
   },
